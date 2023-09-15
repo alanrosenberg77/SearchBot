@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import path.agent.heuristic.Heuristic;
 import path.level.Level;
@@ -101,17 +102,33 @@ public abstract class PathAgent {
 	/**
 	 * Return the states of the entire search tree. 
 	 * 
-	 * @return collection of states/points reached or null if no tree there.
+	 * @return collection of states/points reached or null if no tree there
 	 */
 	public List<Point> searchTreeStates()  {
 		
+		//returning null if tree does not exist
+		if(root == null) {
+			return null;
+		}
 		
+		//otherwise...
+		Queue<Node> q = new LinkedList<>();			//making queue
+		List<Point> points = new LinkedList<>();	//making list for points
+		Node current = null;						//and making handle for current tree node
 		
-		// TODO  complete this algorithm to present a collection of points
-		//       that have been reached by the search or zero if there is no 
-		//       search tree.
+		//initializing search with root node
+		q.add(root);
 		
-		return null;
+		//looping while queue is not empty
+		while(!q.isEmpty()) {
+			
+			current = q.remove();				//getting handle on next item while removing from queue
+			points.add(current.getState());		//adding current point to list of points
+			q.addAll(current.getChildren());	//adding current node's children to queue
+		}
+		
+		//returning list of points
+		return points;
 	}
 
 	
@@ -129,20 +146,24 @@ public abstract class PathAgent {
 		}
 		
 		//otherwise...
-		else {
+		Queue<Node> q = new LinkedList<>();			//making queue
+		Node current = null;						//and making handle for current tree node
+		int depth = 0;
+		
+		//initializing search with root node
+		q.add(root);
+		
+		//looping while queue is not empty
+		while(!q.isEmpty()) {
 			
-			Node current = root;
-			int depth = 0;
+			current = q.remove();				//getting handle on next item while removing from queue
+			q.addAll(current.getChildren());	//adding current node's children to queue
 			
-			//walking up the tree to the root
-			while(current != null) {
-				current = current.getParent();
-				depth++;	//incrementing counter as we go
-			}
-			
-			//returning depth
-			return depth;
+			if(depth < current.getDepth())
+				depth = current.getDepth();
 		}
+		
+		return depth;
 	}
 
 	

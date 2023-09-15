@@ -23,6 +23,8 @@ class Tests {
 	void setUp() {
 		testGoal = new Node(new Point(), null, Action.S);
 		testStart = new Node(new Point(), null, null);
+		
+		// TODO finish setup
 	}
 
 	@Test
