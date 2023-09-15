@@ -114,7 +114,7 @@ public abstract class PathAgent {
 		//otherwise...
 		Queue<Node> q = new LinkedList<>();			//making queue
 		List<Point> points = new LinkedList<>();	//making list for points
-		Node current = null;						//and making handle for current tree node
+		Node current = null;						//and making handle for current node
 		
 		//initializing search with root node
 		q.add(root);
@@ -147,7 +147,7 @@ public abstract class PathAgent {
 		
 		//otherwise...
 		Queue<Node> q = new LinkedList<>();			//making queue
-		Node current = null;						//and making handle for current tree node
+		Node current = null;						//and making handle for current node
 		int depth = 0;
 		
 		//initializing search with root node
@@ -166,7 +166,11 @@ public abstract class PathAgent {
 		return depth;
 	}
 
-	
+	private List<Node> generateChildren() {
+		
+		// TODO make generate children
+		return null;
+	}
 	
 	/**
 	 * Returns to a pre-search state in which no path is known and
