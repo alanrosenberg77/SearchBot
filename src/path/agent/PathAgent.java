@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 import path.agent.heuristic.Heuristic;
+import path.agent.heuristic.SearchHeuristic;
 import path.level.Level;
 
 
@@ -33,7 +34,8 @@ public abstract class PathAgent {
 	protected List<Point> path = null;   // a path resulting from planning; null means path not available
 
 	protected Node root;   // a handle on the resulting search tree after planning.  null means no plan yet.
-
+	
+	protected SearchHeuristic heuristic;
 
 	/**
 	 * All agents are born with a knowledge of the current level...for convenience.  May not
@@ -174,59 +176,17 @@ public abstract class PathAgent {
 	 * @param parent node
 	 * @return List of child nodes
 	 */
-	protected List<Node> generateChildren(Node parent) {
-		
-		List<Node> children = new LinkedList<>();	//making list for child nodes
-		
-		//making north point
-		Point north = new Point();
-		north.setLocation(parent.getState().getX(), parent.getState().getY()+1);
-		
-		//checking north validity
-		if(level.isValid(north)) {
-			
-			//appending to list of children
-			Node n = new Node(north, parent, Action.N);
-			children.add(n);
-		}
-		
-		//making south point
-		Point south = new Point();
-		south.setLocation(parent.getState().getX(), parent.getState().getY()-1);
-		
-		//checking south validity
-		if(level.isValid(south)) {
-			
-			//appending to list of children
-			Node s = new Node(south, parent, Action.S);
-			children.add(s);
-		}
-		
-		//making east point
-		Point east = new Point();
-		east.setLocation(parent.getState().getX()+1, parent.getState().getY());
-		
-		//checking east validity
-		if(level.isValid(east)) {
-			
-			//appending to list of children
-			Node e = new Node(east, parent, Action.E);
-			children.add(e);
-		}
-		
-		//making west point ;)
-		Point west = new Point();
-		west.setLocation(parent.getState().getX()-1, parent.getState().getY());
-		
-		//checking west validity
-		if(level.isValid(west)) {
-			
-			//appending to list of children
-			Node w = new Node(west, parent, Action.W);
-			children.add(w);
-		}
-		
-		return children;
+	protected abstract List<Node> generateChildren(Node parent);
+	
+	/**
+	 * calcFVal will estimate the remaining distance to the goal state
+	 * It will assign this estimate to the current node fval
+	 * 
+	 * @param current node
+	 */
+	protected void calcFVal(Node node) {
+		double dist = node.getState().distance(goal);
+		node.setFval(dist);
 	}
 	
 	/**

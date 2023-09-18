@@ -60,5 +60,11 @@ public class GhostAgent extends PathAgent {
 		return "Ghost Agent";
 	}
 
+	@Override
+	protected List<Node> generateChildren(Node parent) {
+		//does nothing
+		return null;
+	}
+
 
 }
