@@ -91,6 +91,7 @@ public abstract class PathAgent {
 		List<Point> pth = new LinkedList<>();
 
 		while (current != null) {
+			root = current;
 			pth.add(current.getState());
 			current = current.getParent();
 		}

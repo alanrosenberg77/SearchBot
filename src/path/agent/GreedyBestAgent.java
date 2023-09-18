@@ -75,6 +75,7 @@ public class GreedyBestAgent extends PathAgent {
 			
 			//appending to list of children
 			Node n = new Node(north, parent, Action.N);
+			n.setCost(parent.getCost() + 10);
 			n.setFval(heuristic.h(north));
 			children.add(n);
 		}
@@ -88,6 +89,7 @@ public class GreedyBestAgent extends PathAgent {
 			
 			//appending to list of children
 			Node s = new Node(south, parent, Action.S);
+			s.setCost(parent.getCost() + 10);
 			s.setFval(heuristic.h(south));
 			children.add(s);
 		}
@@ -101,6 +103,7 @@ public class GreedyBestAgent extends PathAgent {
 			
 			//appending to list of children
 			Node e = new Node(east, parent, Action.E);
+			e.setCost(parent.getCost() + 10);
 			e.setFval(heuristic.h(east));
 			children.add(e);
 		}
@@ -114,10 +117,12 @@ public class GreedyBestAgent extends PathAgent {
 			
 			//appending to list of children
 			Node w = new Node(west, parent, Action.W);
+			w.setCost(parent.getCost() + 10);
 			w.setFval(heuristic.h(west));
 			children.add(w);
 		}
 		
+		parent.setChildren(children);
 		return children;
 	}
 

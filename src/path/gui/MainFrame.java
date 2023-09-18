@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import path.PathFinderApp;
+import path.agent.AStarAgent;
 import path.agent.GhostAgent;
 import path.agent.GreedyBestAgent;
 import path.agent.PathAgent;
@@ -85,7 +86,7 @@ public class MainFrame extends JFrame {
 		 * Populate the combo box with our variations of agents given the current level
 		 */
 		boxAgent.addItem(new GhostAgent(theLevel));
-		//boxAgent.addItem(new AstarAgent(theLevel));
+		boxAgent.addItem(new AStarAgent(theLevel));
 		boxAgent.addItem(new GreedyBestAgent(theLevel));
 		// ...
 		//
@@ -376,11 +377,22 @@ public class MainFrame extends JFrame {
 		 */
 		this.searchStates = theAgent.searchTreeStates();
 
-		if (this.searchStates != null) { 
-			System.out.println("Tree Size: "+ this.searchStates.size());
-		}
-
-		// TODO the student will add more (to console or to GUI)
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("\n\n\n\n+---- Planning Results ----+");
+		buffer.append("\nPath Length: ");
+		buffer.append(theAgent.getPath().size());
+		buffer.append("\nSearch Tree Size: ");
+		if(searchStates != null)
+			buffer.append(searchStates.size());
+		else
+			buffer.append("N/A");
+		buffer.append("\nSearch Tree Height: ");
+		if(searchStates != null)
+			buffer.append(theAgent.searchTreeDepth());
+		else
+			buffer.append("N/A");
+		
+		System.out.println(buffer.toString());
 		
 		
 		this.repaint();
