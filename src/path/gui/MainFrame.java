@@ -22,6 +22,7 @@ import javax.swing.border.Border;
 
 import path.PathFinderApp;
 import path.agent.GhostAgent;
+import path.agent.GreedyBestAgent;
 import path.agent.PathAgent;
 import path.level.Level;
 
@@ -84,8 +85,8 @@ public class MainFrame extends JFrame {
 		 * Populate the combo box with our variations of agents given the current level
 		 */
 		boxAgent.addItem(new GhostAgent(theLevel));
-		// boxAgent.addItem(new AstarAgent(theLevel));
-		// boxAgent.addItem(new GreedyBestFirst(theLevel));
+		//boxAgent.addItem(new AstarAgent(theLevel));
+		boxAgent.addItem(new GreedyBestAgent(theLevel));
 		// ...
 		//
 		

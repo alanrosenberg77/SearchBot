@@ -11,6 +11,7 @@ import path.agent.AStarAgent;
 import path.agent.Action;
 import path.agent.GreedyBestAgent;
 import path.agent.Node;
+import path.level.Level;
 
 class Tests {
 	
@@ -48,6 +49,12 @@ class Tests {
 	@Test
 	void test_searchTreeDepthNormal() {
 		// TODO test searchTreeDepth()
+	}
+	
+	@Test
+	void test_generateChildrenNormal() {
+		
+		
 	}
 
 }
